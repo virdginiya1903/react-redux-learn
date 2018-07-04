@@ -1,27 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
-import { Router, Route, hashHistory } from 'react-router';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
+import { Router, Route, hashHistory } from "react-router";
 
-import App from './App';
-import './index.css';
-import reducer from './reducers';
-import About from './About';
+import App from "./App";
+import "./index.css";
+import reducer from "./reducers";
+import About from "./About";
+import Globalprops from "./props/Globalprops";
+import Proptypes from "./propstypes/Proptypes";
+import GlobalForm from "./forms/GlobalForm";
+import registerServiceWorker from "./forms/registerServiceWorker";
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path="/" component={App}/>
-      <Route path="/about" component={About}/>
+      <Route path="/" component={App} />
+      <Route path="/about" component={About} />
+      <Route path="/props" component={Globalprops} />
+      <Route path="/propstypes" component={Proptypes} />
+      <Route path="/form" component={GlobalForm} />
     </Router>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
+registerServiceWorker(); // вызываем функцию render у пакета ReactDOM и передаем аргументом компонент (<App /> а вторым
 
 // import { createStore } from 'redux';
 //
@@ -55,4 +63,4 @@ ReactDOM.render(
 // addTrackBtn.addEventListener('click', () => {
 //   const trackName = trackInput.value;
 //   store.dispatch({ type: 'ADD_TRACK', payload: trackName });
-// });
+// });GlobalForm
